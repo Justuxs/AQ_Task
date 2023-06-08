@@ -1,0 +1,54 @@
+﻿<Window x:Class="Task.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Task"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="669" Width="565">
+    <Grid Margin="0,0,0,0" Height="auto" VerticalAlignment="Top">
+        <Button Content="Generuoti" HorizontalAlignment="Left" Margin="228,26,0,0" VerticalAlignment="Top" Height="40" Width="98" Click="btnGeneruoti"/>
+        <DataGrid x:Name="drawingsGridView" HorizontalAlignment="Center" IsReadOnly="True" Height="182" Margin="0,138,0,0" VerticalAlignment="Top" Width="435"  AutoGenerateColumns="False" SelectionChanged="DataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
+                <DataGridTextColumn Header="Harness" Binding="{Binding harness}" />
+                <DataGridTextColumn Header="Harness Version" Binding="{Binding harness_version}" />
+                <DataGridTextColumn Header="Drawing" Binding="{Binding drawing}" />
+                <DataGridTextColumn Header="Drawing Version" Binding="{Binding drawing_version}" />
+                <DataGridTextColumn Header="Wires Count" Binding="{Binding harness_wires.Count}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="matrixGridView" HorizontalAlignment="Center" IsReadOnly="True" Height="200" Margin="0,400,0,0" VerticalAlignment="Top" Width="434"  AutoGenerateColumns="False" SelectionChanged="Matrix_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Pavadinamas 1" Binding="{Binding name1}" />
+                <DataGridTextColumn Header="Pavadinamas 2" Binding="{Binding name2}" />
+                <DataGridTemplateColumn Header="Housing">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="Foreground" Value="Black" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding housing}" Value="False">
+                                                <Setter Property="Text" Value="Klaida" />
+                                                <Setter Property="Foreground" Value="Red" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding housing}" Value="True">
+                                                <Setter Property="Text" Value="Ok" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Sugeneruota pynių komplektacija" HorizontalAlignment="Center" Margin="0,99,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.553,-0.499" FontSize="18"/>
+        <Label Content="Sugeneruotų pynių matrica" HorizontalAlignment="Center" Margin="0,356,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.553,-0.499" FontSize="18"/>
+    </Grid>
+</Window>
